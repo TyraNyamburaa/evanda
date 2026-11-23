@@ -1,0 +1,12 @@
+import { ReactNode } from 'react';
+import { ArrowUpRight, Check, ChevronRight, HelpCircle, Sparkles } from 'lucide-react';
+export function Button({children, variant='primary', className='', onClick, type='button', block=false}:{children:ReactNode;variant?:'primary'|'secondary'|'ghost'|'dark';className?:string;onClick?:()=>void;type?:'button'|'submit';block?:boolean}) { return <button type={type} onClick={onClick} className={`btn btn-${variant} ${block?'btn-block':''} ${className}`}>{children}</button>; }
+export function Pill({children, tone='neutral'}:{children:ReactNode;tone?:'neutral'|'plum'|'sage'|'peach'|'warning'|'success'}) { return <span className={`pill pill-${tone}`}>{children}</span>; }
+export function SectionTitle({eyebrow,title,description,action}:{eyebrow?:string;title:string;description?:string;action?:ReactNode}) { return <div className="section-title"><div>{eyebrow&&<div className="eyebrow">{eyebrow}</div>}<h2>{title}</h2>{description&&<p>{description}</p>}</div>{action}</div>; }
+export function Empty({title,detail}:{title:string;detail?:string}) { return <div className="empty"><Sparkles size={20}/><b>{title}</b>{detail&&<p>{detail}</p>}</div>; }
+export function Modal({title,children,onClose}:{title:string;children:ReactNode;onClose:()=>void}) { return <div className="modal-backdrop" onClick={onClose}><div className="modal" onClick={e=>e.stopPropagation()}><div className="modal-head"><h3>{title}</h3><button className="icon-button" onClick={onClose}>×</button></div>{children}</div></div>; }
+export function Toast({message}:{message:string}) { return <div className="toast"><Check size={17}/>{message}</div>; }
+export function MiniLink({children,onClick}:{children:ReactNode;onClick?:()=>void}) { return <button className="mini-link" onClick={onClick}>{children}<ArrowUpRight size={15}/></button>; }
+export function DetailRow({label,value}:{label:string;value:ReactNode}) { return <div className="detail-row"><span>{label}</span><strong>{value}</strong></div>; }
+export function ProgressLine({steps,active}:{steps:string[];active:number}) { return <div className="progress-line">{steps.map((s,i)=><div key={s} className={`progress-step ${i<=active?'active':''}`}><span className="progress-dot">{i<active?<Check size={12}/>:i+1}</span><span>{s}</span>{i<steps.length-1&&<ChevronRight className="progress-chevron" size={14}/>}</div>)}</div>; }
+export function HelpNote({children}:{children:ReactNode}) { return <div className="help-note"><HelpCircle size={17}/><div>{children}</div></div>; }
